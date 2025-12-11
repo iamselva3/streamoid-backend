@@ -10,11 +10,9 @@ const router = express.Router();
 router.post('/', upload.single('file'), async (req, res) => {
   try {
     if (req.file) {
-      // parse CSV to build attributes array (assumes CSV has rows: key,type,required,...)
+     
       const { columns, sampleRows } = await parseUploadedFile(req.file.path, req.file.originalname);
-      // Simple assumption: the CSV has header rows describing attributes OR you might want to accept file where each row is attribute definition.
-      // For fastest path: treat uploaded CSV's rows as attribute definitions like { key, type, required }
-      // Parse sampleRows into attributes:
+      
       const attributes = sampleRows.map(r => ({
         key: r.key || r.name || r.attribute || Object.values(r)[0],
         type: r.type || 'string',

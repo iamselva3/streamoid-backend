@@ -13,7 +13,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'file required' });
     const parsed = await parseUploadedFile(req.file.path, req.file.originalname);
     await fse.remove(req.file.path);
-    // return columns and sampleRows to the frontend mapping UI
+    
     res.json(parsed);
   } catch (err) {
     console.error(err);

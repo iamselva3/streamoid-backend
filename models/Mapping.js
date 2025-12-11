@@ -1,14 +1,16 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const MappingSchema = new mongoose.Schema({
-  marketplaceId: { type: mongoose.Schema.Types.ObjectId, ref: 'Marketplace', required: true },
+  marketplaceId: { type: mongoose.Schema.Types.ObjectId, ref: "Marketplace", required: true },
   marketplaceName: String,
   sellerFilename: String,
   sellerColumns: [String],
-  mapping: mongoose.Schema.Types.Mixed, // { targetAttr: sourceColumn }
+  mapping: mongoose.Schema.Types.Mixed, 
   sampleRows: [mongoose.Schema.Types.Mixed],
-  createdBy: String, // optional: user id or email
-  createdAt: { type: Date, default: Date.now }
+  createdBy: String, 
+  createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Mapping', MappingSchema);
+const Mapping = mongoose.model("Mapping", MappingSchema);
+
+export default Mapping;

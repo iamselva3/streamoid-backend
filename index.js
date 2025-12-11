@@ -7,6 +7,8 @@ import userRoutes from "./routes/userroutes.js";
 import marketplaceRoutes from "./routes/marketrouts.js";
 import sellerRoutes from "./routes/sellerroutes.js";
 import mappingRoutes from "./routes/mapping.js";  
+import authRoutes from "./routes/auth.js";
+import { authenticate,permit } from "./middleware/auth.js";
 
 
 dotenv.config();
@@ -34,6 +36,10 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
     console.log("Root route accessed");
 });
+
+app.use('/api/auth', authRoutes);
+
+// const { authenticate, permit } = require('./middleware/auth.js');
 
 
 app.use('/api/marketplaces', marketplaceRoutes);
